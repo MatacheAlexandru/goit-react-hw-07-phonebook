@@ -1,13 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
+// URL-ul endpoint-ului MockAPI
 const API_URL = "https://6702b778bd7c8c1ccd3fa72d.mockapi.io/contacts";
 
+// Definirea operațiilor asincrone cu createAsyncThunk
 export const fetchContacts = createAsyncThunk(
   "contacts/fetchAll",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(API_URL); // Folosește axios global din CDN
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -19,7 +20,7 @@ export const addContact = createAsyncThunk(
   "contacts/addContact",
   async (contact, { rejectWithValue }) => {
     try {
-      const response = await axios.post(API_URL, contact);
+      const response = await axios.post(API_URL, contact); // Folosește axios global din CDN
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -31,7 +32,7 @@ export const deleteContact = createAsyncThunk(
   "contacts/deleteContact",
   async (contactId, { rejectWithValue }) => {
     try {
-      await axios.delete(`${API_URL}/${contactId}`);
+      await axios.delete(`${API_URL}/${contactId}`); // Folosește axios global din CDN
       return contactId;
     } catch (error) {
       return rejectWithValue(error.message);
